@@ -1,6 +1,7 @@
 export interface Usuario {
   id: number
   nombre: string
+  usuario: string
   correo: string
   password: string
   rol: "administradora"
@@ -12,6 +13,7 @@ export const usuarios: Usuario[] = [
   {
     id: 1,
     nombre: "Hellen Caribe",
+    usuario: "Hellen",
     correo: "hellen@talabateriacaribe.cr",
     password: "admin1234", 
     rol: "administradora",
