@@ -36,6 +36,7 @@ const navItems = [
   { title: "Materias Primas",url: "/materiales",     icon: Layers          },
   { title: "Clientes",       url: "/clientes",        icon: Users           },
   { title: "Proveedores",    url: "/proveedores",     icon: Truck           },
+  { title: "Auditoria",      url: "/auditoria",       icon: FileText        }
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

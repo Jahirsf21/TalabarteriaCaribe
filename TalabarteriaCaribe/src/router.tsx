@@ -12,6 +12,7 @@ import Clientes from "@/pages/clientes/clientes"
 import Proveedores from "@/pages/proveedores/proveedores"
 import Pedidos from "@/pages/pedidos/pedidos"
 import Ventas from "@/pages/ventas/ventas"
+import Auditoria from "@/pages/auditoria/auditoria"
 
 
 // Ruta protegida — redirige al login si no hay sesión activa
@@ -118,6 +119,14 @@ export default function Router() {
           element={
             <RutaProtegida>
               <Ventas />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/auditoria"
+          element={
+            <RutaProtegida>
+              <Auditoria />
             </RutaProtegida>
           }
         />
