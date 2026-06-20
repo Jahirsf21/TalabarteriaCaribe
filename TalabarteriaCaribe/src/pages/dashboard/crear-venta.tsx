@@ -33,7 +33,7 @@ interface ProductoVenta {
 
 export default function CrearVenta() {
   const navigate = useNavigate()
-  
+
   const [clienteSeleccionado, setClienteSeleccionado] = useState<Cliente | null>(null)
   const [productosVenta, setProductosVenta] = useState<ProductoVenta[]>([])
   const [productoSeleccionado, setProductoSeleccionado] = useState<Producto | null>(null)
@@ -42,17 +42,17 @@ export default function CrearVenta() {
     (sum, item) => sum + item.producto.precio * item.cantidad,
     0
   )
-  
+
   const iva = subtotal * 0.13
   const total = subtotal + iva
 
   const agregarProducto = (cantidad: number) => {
     if (!productoSeleccionado || cantidad <= 0) return
-    
+
     const existente = productosVenta.find(
       (p) => p.producto.id === productoSeleccionado.id
     )
-    
+
     if (existente) {
       setProductosVenta(
         productosVenta.map((p) =>
@@ -67,7 +67,7 @@ export default function CrearVenta() {
         { producto: productoSeleccionado, cantidad },
       ])
     }
-    
+
     setProductoSeleccionado(null)
   }
 
@@ -80,7 +80,7 @@ export default function CrearVenta() {
       eliminarProducto(productoId)
       return
     }
-    
+
     setProductosVenta(
       productosVenta.map((p) =>
         p.producto.id === productoId ? { ...p, cantidad: nuevaCantidad } : p
@@ -90,7 +90,7 @@ export default function CrearVenta() {
 
   const confirmarVenta = () => {
     if (!clienteSeleccionado || productosVenta.length === 0) return
-    
+
     // Aquí se implementaría la lógica para guardar la venta
     console.log("Venta confirmada:", {
       cliente: clienteSeleccionado,
@@ -99,7 +99,7 @@ export default function CrearVenta() {
       iva,
       total,
     })
-    
+
     alert("Venta creada exitosamente")
     navigate("/")
   }
@@ -174,7 +174,7 @@ export default function CrearVenta() {
                 onClienteSelect={setClienteSeleccionado}
                 onClienteChange={() => setClienteSeleccionado(null)}
               />
-              
+
               <ProductoSelector
                 clienteSeleccionado={!!clienteSeleccionado}
                 productoSeleccionado={productoSeleccionado}

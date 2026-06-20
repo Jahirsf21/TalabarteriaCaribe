@@ -38,7 +38,7 @@ interface ItemEntrada {
 
 export default function EntradaInventario() {
   const navigate = useNavigate()
-  
+
   const [tipoEntrada, setTipoEntrada] = useState<"material" | "producto">("material")
   const [proveedorSeleccionado, setProveedorSeleccionado] = useState<Proveedor | null>(null)
   const [itemsEntrada, setItemsEntrada] = useState<ItemEntrada[]>([])
@@ -59,11 +59,11 @@ export default function EntradaInventario() {
   const agregarItem = () => {
     if (tipoEntrada === "material") {
       if (!materialSeleccionado || cantidad <= 0 || costoUnitario <= 0) return
-      
+
       const existente = itemsEntrada.find(
         (i) => i.tipo === "material" && i.material?.id === materialSeleccionado.id
       )
-      
+
       if (existente) {
         setItemsEntrada(
           itemsEntrada.map((i) =>
@@ -75,23 +75,23 @@ export default function EntradaInventario() {
       } else {
         setItemsEntrada([
           ...itemsEntrada,
-          { 
+          {
             tipo: "material",
-            material: materialSeleccionado, 
-            cantidad, 
-            costoUnitario 
+            material: materialSeleccionado,
+            cantidad,
+            costoUnitario
           },
         ])
       }
-      
+
       setMaterialSeleccionado(null)
     } else {
       if (!productoSeleccionado || cantidad <= 0 || costoUnitario <= 0) return
-      
+
       const existente = itemsEntrada.find(
         (i) => i.tipo === "producto" && i.producto?.id === productoSeleccionado.id
       )
-      
+
       if (existente) {
         setItemsEntrada(
           itemsEntrada.map((i) =>
@@ -103,18 +103,18 @@ export default function EntradaInventario() {
       } else {
         setItemsEntrada([
           ...itemsEntrada,
-          { 
+          {
             tipo: "producto",
-            producto: productoSeleccionado, 
-            cantidad, 
-            costoUnitario 
+            producto: productoSeleccionado,
+            cantidad,
+            costoUnitario
           },
         ])
       }
-      
+
       setProductoSeleccionado(null)
     }
-    
+
     setCantidad(1)
     setCostoUnitario(0)
   }
@@ -134,7 +134,7 @@ export default function EntradaInventario() {
       eliminarItem(tipo, id)
       return
     }
-    
+
     setItemsEntrada(
       itemsEntrada.map((i) => {
         if (tipo === "material") {
@@ -161,7 +161,7 @@ export default function EntradaInventario() {
   const confirmarEntrada = () => {
     if (itemsEntrada.length === 0) return
     if (tipoEntrada === "material" && !proveedorSeleccionado) return
-    
+
     // Aquí se implementaría la lógica para guardar la entrada de inventario
     console.log("Entrada de inventario confirmada:", {
       tipo: tipoEntrada,
@@ -191,7 +191,7 @@ export default function EntradaInventario() {
       fecha,
       notas,
     })
-    
+
     alert("Entrada de inventario registrada exitosamente")
     navigate("/")
   }
@@ -289,7 +289,7 @@ export default function EntradaInventario() {
                   onProveedorChange={() => setProveedorSeleccionado(null)}
                 />
               )}
-              
+
               <MaterialSelector
                 tipoEntrada={tipoEntrada}
                 proveedorSeleccionado={tipoEntrada === "material" ? !!proveedorSeleccionado : true}

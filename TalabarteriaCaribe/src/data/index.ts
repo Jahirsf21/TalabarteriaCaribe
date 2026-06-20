@@ -21,3 +21,6 @@ export type { MovimientoInventario, RegistroAuditoria } from "@/data/dashboard"
 
 export { cotizaciones } from "@/data/cotizaciones"
 export type { Cotizacion, ItemCotizacion, EstadoCotizacion } from "@/data/cotizaciones"
+
+export { devoluciones } from "@/data/devoluciones"
+export type { Devolucion, ItemDevolucion, TipoDevolucion } from "@/data/devoluciones"

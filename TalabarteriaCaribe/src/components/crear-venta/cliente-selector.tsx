@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
   Table,
   TableBody,
@@ -11,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Search, ChevronLeft, ChevronRight, X } from "lucide-react"
+import { Search, ChevronLeft, ChevronRight, X, UserPlus } from "lucide-react"
 import { clientes } from "@/data"
 import type { Cliente } from "@/data"
 
@@ -26,6 +27,17 @@ const ITEMS_POR_PAGINA = 10
 export function ClienteSelector({ clienteSeleccionado, onClienteSelect, onClienteChange }: ClienteSelectorProps) {
   const [busqueda, setBusqueda] = useState("")
   const [pagina, setPagina] = useState(1)
+  const [modoNuevoCliente, setModoNuevoCliente] = useState(false)
+  const [nuevoCliente, setNuevoCliente] = useState<Partial<Cliente>>({
+    tipo: "minorista",
+    nombre: "",
+    cedula: "",
+    telefono: "",
+    correo: "",
+    direccion: "",
+    empresa: "",
+    ruc: "",
+  })
 
   const clientesFiltrados = clientes.filter((c) => 
     c.activo && 
@@ -45,6 +57,30 @@ export function ClienteSelector({ clienteSeleccionado, onClienteSelect, onClient
     setPagina(1)
   }
 
+  const handleCrearCliente = () => {
+    if (!nuevoCliente.nombre || !nuevoCliente.cedula || !nuevoCliente.telefono || !nuevoCliente.direccion) {
+      alert("Por favor complete los campos obligatorios: nombre, cédula, teléfono y dirección")
+      return
+    }
+
+    const cliente: Cliente = {
+      id: Date.now(),
+      tipo: nuevoCliente.tipo || "minorista",
+      nombre: nuevoCliente.nombre,
+      cedula: nuevoCliente.cedula,
+      telefono: nuevoCliente.telefono,
+      correo: nuevoCliente.correo || null,
+      direccion: nuevoCliente.direccion,
+      empresa: nuevoCliente.empresa,
+      ruc: nuevoCliente.ruc,
+      totalComprado: 0,
+      activo: true,
+      creadoEn: new Date().toISOString(),
+    }
+
+    onClienteSelect(cliente)
+  }
+
   if (clienteSeleccionado) {
     return (
       <Card>
@@ -56,7 +92,7 @@ export function ClienteSelector({ clienteSeleccionado, onClienteSelect, onClient
             </Button>
           </CardTitle>
           <CardDescription className="text-xs">
-            Cliente para esta venta
+            Cliente para este pedido
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -95,142 +131,294 @@ export function ClienteSelector({ clienteSeleccionado, onClienteSelect, onClient
           1. Seleccionar Cliente
         </CardTitle>
         <CardDescription className="text-xs">
-          Elija el cliente para esta venta
+          Elija el cliente para este pedido
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        {/* Search input */}
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Buscar por nombre, cédula o empresa..."
-            value={busqueda}
-            onChange={(e) => handleSearch(e.target.value)}
-            className="pl-9"
-          />
+        {/* Mode toggle */}
+        <div className="flex gap-2">
+          <Button
+            variant={!modoNuevoCliente ? "default" : "outline"}
+            size="sm"
+            onClick={() => setModoNuevoCliente(false)}
+            className="flex-1"
+          >
+            <Search className="h-4 w-4 mr-2" />
+            Buscar Cliente
+          </Button>
+          <Button
+            variant={modoNuevoCliente ? "default" : "outline"}
+            size="sm"
+            onClick={() => setModoNuevoCliente(true)}
+            className="flex-1"
+          >
+            <UserPlus className="h-4 w-4 mr-2" />
+            Cliente Nuevo
+          </Button>
         </div>
+
+        {!modoNuevoCliente ? (
+          <>
+            {/* Search input */}
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Buscar por nombre, cédula o empresa..."
+                value={busqueda}
+                onChange={(e) => handleSearch(e.target.value)}
+                className="pl-9"
+              />
+            </div>
         
         {/* Clients table - Responsive */}
         <div className="rounded-lg border" style={{ borderColor: "var(--border)" }}>
-          {/* Mobile: Card layout */}
-          <div className="md:hidden space-y-2">
-            {clientesPaginados.length === 0 ? (
-              <div className="text-center py-8 text-muted-foreground text-sm">
-                No se encontraron clientes
-              </div>
-            ) : (
-              clientesPaginados.map((cliente) => (
-                <div
-                  key={cliente.id}
-                  className="rounded-lg border p-3 space-y-2"
-                  style={{ borderColor: "var(--border)" }}
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium text-sm truncate" style={{ color: "var(--foreground)" }}>
-                        {cliente.nombre}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        {cliente.tipo === "corporativo" ? cliente.empresa : cliente.cedula}
-                      </p>
-                    </div>
-                    <Badge variant="outline" className="text-xs shrink-0">
-                      {cliente.tipo === "corporativo" ? "Corp" : "Minor"}
-                    </Badge>
-                  </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => onClienteSelect(cliente)}
-                    className="w-full"
-                  >
-                    Seleccionar
-                  </Button>
-                </div>
-              ))
-            )}
-          </div>
-
-          {/* Desktop: Table layout */}
-          <div className="hidden md:block overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-xs whitespace-nowrap">Nombre</TableHead>
-                  <TableHead className="text-xs whitespace-nowrap">Cédula/Empresa</TableHead>
-                  <TableHead className="text-xs whitespace-nowrap">Tipo</TableHead>
-                  <TableHead className="text-xs text-right whitespace-nowrap">Acción</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
+          {busqueda.trim() === "" ? (
+            <div className="text-center py-8 text-muted-foreground text-sm">
+              Ingrese un término de búsqueda para encontrar clientes
+            </div>
+          ) : (
+            <>
+              {/* Mobile: Card layout */}
+              <div className="md:hidden space-y-2">
                 {clientesPaginados.length === 0 ? (
-                  <TableRow>
-                    <TableCell colSpan={4} className="text-center text-sm text-muted-foreground py-8">
-                      No se encontraron clientes
-                    </TableCell>
-                  </TableRow>
+                  <div className="text-center py-8 text-muted-foreground text-sm">
+                    No se encontraron clientes
+                  </div>
                 ) : (
                   clientesPaginados.map((cliente) => (
-                    <TableRow key={cliente.id}>
-                      <TableCell className="text-sm font-medium">
-                        {cliente.nombre}
-                      </TableCell>
-                      <TableCell className="text-sm text-muted-foreground">
-                        {cliente.tipo === "corporativo" ? cliente.empresa : cliente.cedula}
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className="text-xs">
+                    <div
+                      key={cliente.id}
+                      className="rounded-lg border p-3 space-y-2"
+                      style={{ borderColor: "var(--border)" }}
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-sm truncate" style={{ color: "var(--foreground)" }}>
+                            {cliente.nombre}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            {cliente.tipo === "corporativo" ? cliente.empresa : cliente.cedula}
+                          </p>
+                        </div>
+                        <Badge variant="outline" className="text-xs shrink-0">
                           {cliente.tipo === "corporativo" ? "Corp" : "Minor"}
                         </Badge>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => onClienteSelect(cliente)}
-                          className="shrink-0"
-                        >
-                          Seleccionar
-                        </Button>
-                      </TableCell>
-                    </TableRow>
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => onClienteSelect(cliente)}
+                        className="w-full"
+                      >
+                        Seleccionar
+                      </Button>
+                    </div>
                   ))
                 )}
-              </TableBody>
-            </Table>
-          </div>
+              </div>
+
+              {/* Desktop: Table layout */}
+              <div className="hidden md:block overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="text-xs whitespace-nowrap">Nombre</TableHead>
+                      <TableHead className="text-xs whitespace-nowrap">Cédula/Empresa</TableHead>
+                      <TableHead className="text-xs whitespace-nowrap">Tipo</TableHead>
+                      <TableHead className="text-xs text-right whitespace-nowrap">Acción</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {clientesPaginados.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={4} className="text-center text-sm text-muted-foreground py-8">
+                          No se encontraron clientes
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      clientesPaginados.map((cliente) => (
+                        <TableRow key={cliente.id}>
+                          <TableCell className="text-sm font-medium">
+                            {cliente.nombre}
+                          </TableCell>
+                          <TableCell className="text-sm text-muted-foreground">
+                            {cliente.tipo === "corporativo" ? cliente.empresa : cliente.cedula}
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="outline" className="text-xs">
+                              {cliente.tipo === "corporativo" ? "Corp" : "Minor"}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => onClienteSelect(cliente)}
+                              className="shrink-0"
+                            >
+                              Seleccionar
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+            </>
+          )}
         </div>
         
-        {/* Pagination */}
-        {totalPaginas > 1 && (
-          <div className="flex items-center justify-between">
-            <p className="text-xs text-muted-foreground">
-              {(pagina - 1) * ITEMS_POR_PAGINA + 1} - {Math.min(pagina * ITEMS_POR_PAGINA, clientesFiltrados.length)} de {clientesFiltrados.length}
-            </p>
-            <div className="flex items-center gap-2">
+            {/* Pagination */}
+            {busqueda.trim() !== "" && totalPaginas > 1 && (
+              <div className="flex items-center justify-between">
+                <p className="text-xs text-muted-foreground">
+                  {(pagina - 1) * ITEMS_POR_PAGINA + 1} - {Math.min(pagina * ITEMS_POR_PAGINA, clientesFiltrados.length)} de {clientesFiltrados.length}
+                </p>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8"
+                    onClick={() => setPagina(pagina - 1)}
+                    disabled={pagina === 1}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <span className="text-sm">
+                    {pagina} de {totalPaginas}
+                  </span>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8"
+                    onClick={() => setPagina(pagina + 1)}
+                    disabled={pagina === totalPaginas}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            )}
+          </>
+        ) : (
+          <>
+            {/* Nuevo Cliente Form */}
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label className="text-xs">Tipo de Cliente *</Label>
+                  <div className="flex gap-2">
+                    <Button
+                      type="button"
+                      variant={nuevoCliente.tipo === "minorista" ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setNuevoCliente({ ...nuevoCliente, tipo: "minorista" })}
+                      className="flex-1"
+                    >
+                      Minorista
+                    </Button>
+                    <Button
+                      type="button"
+                      variant={nuevoCliente.tipo === "corporativo" ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setNuevoCliente({ ...nuevoCliente, tipo: "corporativo" })}
+                      className="flex-1"
+                    >
+                      Corporativo
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label className="text-xs">Nombre Completo *</Label>
+                  <Input
+                    placeholder="Nombre del cliente"
+                    value={nuevoCliente.nombre || ""}
+                    onChange={(e) => setNuevoCliente({ ...nuevoCliente, nombre: e.target.value })}
+                    className="text-sm"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs">Cédula *</Label>
+                  <Input
+                    placeholder="0-0000-0000"
+                    value={nuevoCliente.cedula || ""}
+                    onChange={(e) => setNuevoCliente({ ...nuevoCliente, cedula: e.target.value })}
+                    className="text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label className="text-xs">Teléfono *</Label>
+                  <Input
+                    placeholder="0000-0000"
+                    value={nuevoCliente.telefono || ""}
+                    onChange={(e) => setNuevoCliente({ ...nuevoCliente, telefono: e.target.value })}
+                    className="text-sm"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs">Correo Electrónico</Label>
+                  <Input
+                    type="email"
+                    placeholder="correo@ejemplo.com"
+                    value={nuevoCliente.correo || ""}
+                    onChange={(e) => setNuevoCliente({ ...nuevoCliente, correo: e.target.value })}
+                    className="text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label className="text-xs">Dirección *</Label>
+                <Input
+                  placeholder="Dirección completa"
+                  value={nuevoCliente.direccion || ""}
+                  onChange={(e) => setNuevoCliente({ ...nuevoCliente, direccion: e.target.value })}
+                  className="text-sm"
+                />
+              </div>
+
+              {nuevoCliente.tipo === "corporativo" && (
+                <>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label className="text-xs">Empresa</Label>
+                      <Input
+                        placeholder="Nombre de la empresa"
+                        value={nuevoCliente.empresa || ""}
+                        onChange={(e) => setNuevoCliente({ ...nuevoCliente, empresa: e.target.value })}
+                        className="text-sm"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-xs">RUC</Label>
+                      <Input
+                        placeholder="3-000-000000"
+                        value={nuevoCliente.ruc || ""}
+                        onChange={(e) => setNuevoCliente({ ...nuevoCliente, ruc: e.target.value })}
+                        className="text-sm"
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+
               <Button
-                variant="outline"
-                size="icon"
-                className="h-8 w-8"
-                onClick={() => setPagina(pagina - 1)}
-                disabled={pagina === 1}
+                onClick={handleCrearCliente}
+                className="w-full"
+                size="lg"
               >
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <span className="text-sm">
-                {pagina} de {totalPaginas}
-              </span>
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-8 w-8"
-                onClick={() => setPagina(pagina + 1)}
-                disabled={pagina === totalPaginas}
-              >
-                <ChevronRight className="h-4 w-4" />
+                <UserPlus className="h-4 w-4 mr-2" />
+                Crear y Seleccionar Cliente
               </Button>
             </div>
-          </div>
+          </>
         )}
       </CardContent>
     </Card>

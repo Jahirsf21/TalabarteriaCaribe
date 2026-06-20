@@ -12,6 +12,8 @@ import Clientes from "@/pages/clientes/clientes"
 import Proveedores from "@/pages/proveedores/proveedores"
 import Pedidos from "@/pages/pedidos/pedidos"
 import Ventas from "@/pages/ventas/ventas"
+import DetalleVenta from "@/pages/ventas/detalle-venta"
+import RegistrarDevolucion from "@/pages/ventas/registrar-devolucion"
 import Auditoria from "@/pages/auditoria/auditoria"
 
 
@@ -50,6 +52,32 @@ export default function Router() {
             </RutaProtegida>
           }
         />
+        {/* ── Ventas ── */}
+        <Route
+          path="/ventas"
+          element={
+            <RutaProtegida>
+              <Ventas />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/ventas/:id"
+          element={
+            <RutaProtegida>
+              <DetalleVenta />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/ventas/:id/devolucion"
+          element={
+            <RutaProtegida>
+              <RegistrarDevolucion />
+            </RutaProtegida>
+          }
+        />
+        {/* ── Pedidos ── */}
         <Route
           path="/pedidos/generar"
           element={
@@ -111,14 +139,6 @@ export default function Router() {
           element={
             <RutaProtegida>
               <Pedidos />
-            </RutaProtegida>
-          }
-        />
-        <Route
-          path="/ventas"
-          element={
-            <RutaProtegida>
-              <Ventas />
             </RutaProtegida>
           }
         />

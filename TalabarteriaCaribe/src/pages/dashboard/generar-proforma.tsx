@@ -34,7 +34,7 @@ interface ItemCotizacion {
 
 export default function GenerarProforma() {
   const navigate = useNavigate()
-  
+
   const [clienteSeleccionado, setClienteSeleccionado] = useState<Cliente | null>(null)
   const [itemsCotizacion, setItemsCotizacion] = useState<ItemCotizacion[]>([])
   const [productoSeleccionado, setProductoSeleccionado] = useState<Producto | null>(null)
@@ -46,17 +46,17 @@ export default function GenerarProforma() {
     (sum, item) => sum + item.precioUnitario * item.cantidad,
     0
   )
-  
+
   const iva = subtotal * 0.13
   const montoTotal = subtotal + iva
 
   const agregarItem = () => {
     if (!productoSeleccionado || cantidad <= 0) return
-    
+
     const existente = itemsCotizacion.find(
       (i) => i.producto.id === productoSeleccionado.id
     )
-    
+
     if (existente) {
       setItemsCotizacion(
         itemsCotizacion.map((i) =>
@@ -68,14 +68,14 @@ export default function GenerarProforma() {
     } else {
       setItemsCotizacion([
         ...itemsCotizacion,
-        { 
-          producto: productoSeleccionado, 
-          cantidad, 
-          precioUnitario: productoSeleccionado.precio 
+        {
+          producto: productoSeleccionado,
+          cantidad,
+          precioUnitario: productoSeleccionado.precio
         },
       ])
     }
-    
+
     setProductoSeleccionado(null)
     setCantidad(1)
   }
@@ -89,7 +89,7 @@ export default function GenerarProforma() {
       eliminarItem(productoId)
       return
     }
-    
+
     setItemsCotizacion(
       itemsCotizacion.map((i) =>
         i.producto.id === productoId ? { ...i, cantidad: nuevaCantidad } : i
@@ -107,7 +107,7 @@ export default function GenerarProforma() {
 
   const confirmarCotizacion = () => {
     if (!clienteSeleccionado || itemsCotizacion.length === 0) return
-    
+
     // Aquí se implementaría la lógica para guardar la cotización
     console.log("Cotización confirmada:", {
       cliente: clienteSeleccionado,
@@ -124,7 +124,7 @@ export default function GenerarProforma() {
       validezDias,
       notas,
     })
-    
+
     alert("Cotización creada exitosamente")
     navigate("/")
   }
@@ -199,7 +199,7 @@ export default function GenerarProforma() {
                 onClienteSelect={setClienteSeleccionado}
                 onClienteChange={() => setClienteSeleccionado(null)}
               />
-              
+
               <ProductoSelector
                 clienteSeleccionado={!!clienteSeleccionado}
                 productoSeleccionado={productoSeleccionado}
