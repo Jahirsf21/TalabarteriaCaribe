@@ -48,73 +48,96 @@
     --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ─── Talabartería Caribe — Paleta cuero cálido ─── */
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
+    --background: #F8F3EC;
+    --foreground: #3B1F0E;
+
+    --card: #F5EFE6;
+    --card-foreground: #3B1F0E;
+
+    --popover: #F5EFE6;
+    --popover-foreground: #3B1F0E;
+
+    --primary: #6B3F1F;
+    --primary-foreground: #F5EFE6;
+
+    --secondary: #E9DCCB;
+    --secondary-foreground: #3B1F0E;
+
+    --muted: #F0E8DC;
+    --muted-foreground: #8B6347;
+
+    --accent: #E9DCCB;
+    --accent-foreground: #3B1F0E;
+
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
+
+    --border: #E9DCCB;
+    --input: #D9C3A5;
+    --ring: #B8895B;
+
+    --chart-1: #B8895B;
+    --chart-2: #C9A87C;
+    --chart-3: #8B6347;
+    --chart-4: #6B3F1F;
+    --chart-5: #3B1F0E;
+
     --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+
+    /* Sidebar */
+    --sidebar: #F5EFE6;
+    --sidebar-foreground: #3B1F0E;
+    --sidebar-primary: #6B3F1F;
+    --sidebar-primary-foreground: #F5EFE6;
+    --sidebar-accent: #E9DCCB;
+    --sidebar-accent-foreground: #3B1F0E;
+    --sidebar-border: #D9C3A5;
+    --sidebar-ring: #B8895B;
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
+    --background: #1C0F07;
+    --foreground: #F5EFE6;
+
+    --card: #2A1710;
+    --card-foreground: #F5EFE6;
+
+    --popover: #2A1710;
+    --popover-foreground: #F5EFE6;
+
+    --primary: #C9A87C;
+    --primary-foreground: #1C0F07;
+
+    --secondary: #3D2415;
+    --secondary-foreground: #F5EFE6;
+
+    --muted: #3D2415;
+    --muted-foreground: #C9A87C;
+
+    --accent: #3D2415;
+    --accent-foreground: #F5EFE6;
+
     --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+
+    --border: #3D2415;
+    --input: #3D2415;
+    --ring: #B8895B;
+
+    --chart-1: #C9A87C;
+    --chart-2: #B8895B;
+    --chart-3: #8B6347;
+    --chart-4: #6B3F1F;
+    --chart-5: #3B1F0E;
+
+    --sidebar: #2A1710;
+    --sidebar-foreground: #F5EFE6;
+    --sidebar-primary: #C9A87C;
+    --sidebar-primary-foreground: #1C0F07;
+    --sidebar-accent: #3D2415;
+    --sidebar-accent-foreground: #F5EFE6;
+    --sidebar-border: #3D2415;
+    --sidebar-ring: #B8895B;
 }
 
 @layer base {

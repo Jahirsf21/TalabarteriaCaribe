@@ -1,17 +1,22 @@
 import * as React from "react"
-
-import { SearchForm } from "@/components/search-form"
-import { VersionSwitcher } from "@/components/version-switcher"
+import { useNavigate, useLocation } from "react-router"
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+  LayoutDashboard,
+  ShoppingCart,
+  ClipboardList,
+  Package,
+  Layers,
+  Users,
+  Truck,
+  FileText,
+  LogOut,
+} from "lucide-react"
+
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
-  SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
@@ -19,196 +24,157 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import { ChevronRightIcon } from "lucide-react"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
 
-// This is sample data.
-const data = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
-  navMain: [
-    {
-      title: "Getting Started",
-      url: "#",
-      items: [
-        {
-          title: "Installation",
-          url: "#",
-        },
-        {
-          title: "Project Structure",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Build Your Application",
-      url: "#",
-      items: [
-        {
-          title: "Routing",
-          url: "#",
-        },
-        {
-          title: "Data Fetching",
-          url: "#",
-          isActive: true,
-        },
-        {
-          title: "Rendering",
-          url: "#",
-        },
-        {
-          title: "Caching",
-          url: "#",
-        },
-        {
-          title: "Styling",
-          url: "#",
-        },
-        {
-          title: "Optimizing",
-          url: "#",
-        },
-        {
-          title: "Configuring",
-          url: "#",
-        },
-        {
-          title: "Testing",
-          url: "#",
-        },
-        {
-          title: "Authentication",
-          url: "#",
-        },
-        {
-          title: "Deploying",
-          url: "#",
-        },
-        {
-          title: "Upgrading",
-          url: "#",
-        },
-        {
-          title: "Examples",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "API Reference",
-      url: "#",
-      items: [
-        {
-          title: "Components",
-          url: "#",
-        },
-        {
-          title: "File Conventions",
-          url: "#",
-        },
-        {
-          title: "Functions",
-          url: "#",
-        },
-        {
-          title: "next.config.js Options",
-          url: "#",
-        },
-        {
-          title: "CLI",
-          url: "#",
-        },
-        {
-          title: "Edge Runtime",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Architecture",
-      url: "#",
-      items: [
-        {
-          title: "Accessibility",
-          url: "#",
-        },
-        {
-          title: "Fast Refresh",
-          url: "#",
-        },
-        {
-          title: "Next.js Compiler",
-          url: "#",
-        },
-        {
-          title: "Supported Browsers",
-          url: "#",
-        },
-        {
-          title: "Turbopack",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Community",
-      url: "#",
-      items: [
-        {
-          title: "Contribution Guide",
-          url: "#",
-        },
-      ],
-    },
-  ],
-}
+const navItems = [
+  { title: "Dashboard",      url: "/dashboard",      icon: LayoutDashboard },
+  { title: "Ventas",         url: "/ventas",          icon: ShoppingCart    },
+  { title: "Pedidos",        url: "/pedidos",         icon: ClipboardList   },
+  { title: "Proformas / Cotizaciones", url: "/proformas", icon: FileText    },
+  { title: "Productos",      url: "/productos",       icon: Package         },
+  { title: "Materias Primas",url: "/materias-primas", icon: Layers          },
+  { title: "Clientes",       url: "/clientes",        icon: Users           },
+  { title: "Proveedores",    url: "/proveedores",     icon: Truck           },
+]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const navigate  = useNavigate()
+  const location  = useLocation()
+
+  const usuario = React.useMemo(() => {
+    try {
+      return JSON.parse(localStorage.getItem("usuario") || "{}")
+    } catch {
+      return {}
+    }
+  }, [])
+
+  const iniciales = React.useMemo(() => {
+    const nombre: string = usuario?.nombre ?? "HC"
+    return nombre
+      .split(" ")
+      .slice(0, 2)
+      .map((n: string) => n[0])
+      .join("")
+      .toUpperCase()
+  }, [usuario])
+
+  const handleLogout = () => {
+    localStorage.removeItem("usuario")
+    navigate("/login")
+  }
+
   return (
     <Sidebar {...props}>
-      <SidebarHeader>
-        <VersionSwitcher
-          versions={data.versions}
-          defaultVersion={data.versions[0]}
-        />
-        <SearchForm />
+      {/* ── Header: logo + nombre ── */}
+      <SidebarHeader
+        className="border-b px-4 py-3"
+        style={{ borderColor: "var(--sidebar-border)" }}
+      >
+        <div className="flex items-center gap-3">
+          <img
+            src="/talabarteriacaribe.svg"
+            alt="Talabartería Caribe"
+            className="h-10 w-auto shrink-0"
+          />
+          <div className="leading-tight">
+            <p
+              className="text-sm font-semibold font-serif"
+              style={{ color: "var(--sidebar-foreground)" }}
+            >
+              Talabartería
+            </p>
+            <p
+              className="text-sm font-semibold font-serif"
+              style={{ color: "var(--sidebar-primary)" }}
+            >
+              Caribe
+            </p>
+          </div>
+        </div>
       </SidebarHeader>
-      <SidebarContent className="gap-0">
-        {/* We create a collapsible SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
-          <Collapsible
-            key={item.title}
-            title={item.title}
-            defaultOpen
-            className="group/collapsible"
-          >
-            <SidebarGroup>
-              <SidebarGroupLabel
-                asChild
-                className="group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-              >
-                <CollapsibleTrigger>
-                  {item.title}{" "}
-                  <ChevronRightIcon className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                </CollapsibleTrigger>
-              </SidebarGroupLabel>
-              <CollapsibleContent>
-                <SidebarGroupContent>
-                  <SidebarMenu>
-                    {item.items.map((item) => (
-                      <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton asChild isActive={item.isActive}>
-                          <a href={item.url}>{item.title}</a>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    ))}
-                  </SidebarMenu>
-                </SidebarGroupContent>
-              </CollapsibleContent>
-            </SidebarGroup>
-          </Collapsible>
-        ))}
+
+      {/* ── Navegación principal ── */}
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Menú principal</SidebarGroupLabel>
+          <SidebarMenu>
+            {navItems.map((item) => {
+              const isActive = location.pathname === item.url
+              return (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={isActive}
+                    tooltip={item.title}
+                  >
+                    <a
+                      href={item.url}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        navigate(item.url)
+                      }}
+                    >
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )
+            })}
+          </SidebarMenu>
+        </SidebarGroup>
       </SidebarContent>
+
+      {/* ── Footer: usuario + logout ── */}
+      <SidebarFooter
+        className="border-t p-3"
+        style={{ borderColor: "var(--sidebar-border)" }}
+      >
+        <div className="flex items-center gap-3">
+          <Avatar size="default">
+            <AvatarFallback
+              style={{
+                backgroundColor: "var(--sidebar-primary)",
+                color: "var(--sidebar-primary-foreground)",
+                fontSize: "0.7rem",
+                fontWeight: 600,
+              }}
+            >
+              {iniciales}
+            </AvatarFallback>
+          </Avatar>
+
+          <div className="min-w-0 flex-1">
+            <p
+              className="truncate text-sm font-medium leading-tight"
+              style={{ color: "var(--sidebar-foreground)" }}
+            >
+              {usuario?.nombre ?? "Hellen Caribe"}
+            </p>
+            <p
+              className="text-xs capitalize"
+              style={{ color: "var(--muted-foreground)" }}
+            >
+              {usuario?.rol ?? "administradora"}
+            </p>
+          </div>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleLogout}
+            className="h-8 w-8 shrink-0"
+            style={{ color: "var(--muted-foreground)" }}
+            title="Cerrar sesión"
+            aria-label="Cerrar sesión"
+          >
+            <LogOut className="h-4 w-4" />
+          </Button>
+        </div>
+      </SidebarFooter>
+
       <SidebarRail />
     </Sidebar>
   )

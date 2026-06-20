@@ -20,6 +20,8 @@ export interface Pedido {
   descripcion: string
   dimensiones?: string
   materiales?: string
+  subtotal: number
+  iva: number
   precioTotal: number
   pagos: PagoPedido[]
   saldoPendiente: number
@@ -40,11 +42,13 @@ export const pedidos: Pedido[] = [
     descripcion: "Bolso grande de cuero negro con diseño floral repujado, asa larga, cierre dorado y bolsillo interior con cremallera.",
     dimensiones: "35cm x 25cm x 12cm",
     materiales: "Cuero vacuno negro, herrajes dorados",
-    precioTotal: 75000,
+    subtotal: 75000,
+    iva: 9750,
+    precioTotal: 84750,
     pagos: [
       { monto: 30000, metodoPago: "sinpe", referenciaSinpe: "SINPE-20260520-003", fecha: "2026-05-20T10:00:00Z" },
     ],
-    saldoPendiente: 45000,
+    saldoPendiente: 54750,
     estado: "en_produccion",
     historialEstados: [
       { estadoAnterior: "pendiente", estadoNuevo: "en_produccion", fecha: "2026-05-22T09:00:00Z" },
@@ -59,12 +63,14 @@ export const pedidos: Pedido[] = [
     descripcion: "3 riendas para caballo de trabajo pesado, cuero curtido doble, costuras reforzadas con hilo encerado, color café oscuro.",
     dimensiones: "1.8 metros cada una",
     materiales: "Cuero vacuno doble curtido café, hilo encerado negro grueso",
-    precioTotal: 84000,
+    subtotal: 84000,
+    iva: 10920,
+    precioTotal: 94920,
     pagos: [
       { monto: 40000, metodoPago: "efectivo", fecha: "2026-05-15T08:00:00Z" },
       { monto: 44000, metodoPago: "efectivo", fecha: "2026-06-10T09:00:00Z" },
     ],
-    saldoPendiente: 0,
+    saldoPendiente: 10920,
     estado: "entregado",
     historialEstados: [
       { estadoAnterior: "pendiente", estadoNuevo: "en_produccion", fecha: "2026-05-16T09:00:00Z" },
@@ -81,11 +87,13 @@ export const pedidos: Pedido[] = [
     nombreCliente: "Sofía Castillo Ureña",
     descripcion: "Cartera pequeña de cuero miel con monograma bordado 'SC', cierre magnético y cadena desmontable.",
     materiales: "Cuero miel, cadena metálica dorada",
-    precioTotal: 42000,
+    subtotal: 42000,
+    iva: 5460,
+    precioTotal: 47460,
     pagos: [
       { monto: 20000, metodoPago: "sinpe", referenciaSinpe: "SINPE-20260601-004", fecha: "2026-06-01T15:00:00Z" },
     ],
-    saldoPendiente: 22000,
+    saldoPendiente: 27460,
     estado: "pendiente",
     historialEstados: [],
     fechaEntregaEstimada: "2026-07-05T00:00:00Z",
@@ -99,9 +107,11 @@ export const pedidos: Pedido[] = [
     descripcion: "Cinturón extra ancho para trabajo, hebilla de acero doble pasador, 5cm de ancho, color negro.",
     dimensiones: "Talla 36, 120cm largo",
     materiales: "Cuero negro grueso, hebilla acero inoxidable",
-    precioTotal: 22000,
+    subtotal: 22000,
+    iva: 2860,
+    precioTotal: 24860,
     pagos: [],
-    saldoPendiente: 22000,
+    saldoPendiente: 24860,
     estado: "listo",
     historialEstados: [
       { estadoAnterior: "pendiente", estadoNuevo: "en_produccion", fecha: "2026-06-03T09:00:00Z" },
@@ -117,11 +127,13 @@ export const pedidos: Pedido[] = [
     nombreCliente: "Carlos Rodríguez Mora",
     descripcion: "Billetera con espacio para fotos y nombre grabado en relieve: 'Carlos R.'",
     materiales: "Cuero café claro",
-    precioTotal: 18000,
+    subtotal: 18000,
+    iva: 2340,
+    precioTotal: 20340,
     pagos: [
       { monto: 18000, metodoPago: "efectivo", fecha: "2026-06-08T10:00:00Z" },
     ],
-    saldoPendiente: 0,
+    saldoPendiente: 2340,
     estado: "cancelado",
     historialEstados: [
       { estadoAnterior: "pendiente", estadoNuevo: "cancelado", fecha: "2026-06-09T11:00:00Z" },

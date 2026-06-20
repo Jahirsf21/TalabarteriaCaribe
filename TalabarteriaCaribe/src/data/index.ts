@@ -18,3 +18,6 @@ export type { Pedido, PagoPedido, CambioPedido, EstadoPedido } from "@/data/pedi
 
 export { dashboardStats, movimientosInventario, logAuditoria } from "@/data/dashboard"
 export type { MovimientoInventario, RegistroAuditoria } from "@/data/dashboard"
+
+export { cotizaciones } from "@/data/cotizaciones"
+export type { Cotizacion, ItemCotizacion, EstadoCotizacion } from "@/data/cotizaciones"

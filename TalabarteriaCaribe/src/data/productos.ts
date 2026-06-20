@@ -5,6 +5,7 @@ export interface Producto {
   nombre: string
   descripcion: string
   precio: number // colones
+  porcentajeIva: number
   stock: number
   stockMinimo: number
   categoria: string
@@ -20,6 +21,7 @@ export const productos: Producto[] = [
     nombre: "Cinturón de cuero trenzado",
     descripcion: "Cinturón artesanal de cuero vacuno trenzado a mano, disponible en tallas S, M, L, XL.",
     precio: 15000,
+    porcentajeIva: 13,
     stock: 12,
     stockMinimo: 5,
     categoria: "Cinturones",
@@ -33,6 +35,7 @@ export const productos: Producto[] = [
     nombre: "Billetera de cuero liso",
     descripcion: "Billetera delgada de cuero liso con 6 compartimentos para tarjetas y bolsillo central.",
     precio: 12000,
+    porcentajeIva: 13,
     stock: 3,
     stockMinimo: 5,
     categoria: "Billeteras",
@@ -46,6 +49,7 @@ export const productos: Producto[] = [
     nombre: "Bolso de mano artesanal",
     descripcion: "Bolso de cuero con costura a mano, asa corta y cierre metálico dorado.",
     precio: 45000,
+    porcentajeIva: 13,
     stock: 5,
     stockMinimo: 3,
     categoria: "Bolsos",
@@ -59,6 +63,7 @@ export const productos: Producto[] = [
     nombre: "Llavero personalizado",
     descripcion: "Llavero de cuero con grabado de iniciales o nombre, colores disponibles: café, negro y miel.",
     precio: 5000,
+    porcentajeIva: 13,
     stock: 0,
     stockMinimo: 10,
     categoria: "Accesorios",
@@ -72,6 +77,7 @@ export const productos: Producto[] = [
     nombre: "Rienda para caballo",
     descripcion: "Rienda de cuero trenzado reforzado, longitud estándar 1.8m, resistente a la humedad.",
     precio: 28000,
+    porcentajeIva: 13,
     stock: 7,
     stockMinimo: 4,
     categoria: "Equitación",
@@ -85,6 +91,7 @@ export const productos: Producto[] = [
     nombre: "Cartera de cuero repujado",
     descripcion: "Cartera con diseño repujado de flores tropicales, cierre con broche magnético.",
     precio: 38000,
+    porcentajeIva: 13,
     stock: 2,
     stockMinimo: 3,
     categoria: "Carteras",
@@ -98,6 +105,7 @@ export const productos: Producto[] = [
     nombre: "Mochila de cuero pequeña",
     descripcion: "Mochila artesanal de cuero genuino con dos compartimentos y correas ajustables.",
     precio: 65000,
+    porcentajeIva: 13,
     stock: 4,
     stockMinimo: 2,
     categoria: "Bolsos",
@@ -111,6 +119,7 @@ export const productos: Producto[] = [
     nombre: "Porta documentos ejecutivo",
     descripcion: "Porta documentos de cuero liso en color negro, tamaño A4, con cierre cremallera.",
     precio: 22000,
+    porcentajeIva: 13,
     stock: 6,
     stockMinimo: 3,
     categoria: "Accesorios",

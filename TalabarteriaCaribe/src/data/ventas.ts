@@ -14,6 +14,8 @@ export interface Venta {
   clienteId: number | null // null = venta sin cliente registrado
   nombreCliente: string
   items: ItemVenta[]
+  subtotal: number
+  iva: number
   total: number
   metodoPago: MetodoPago
   referenciaSinpe?: string
@@ -31,7 +33,9 @@ export const ventas: Venta[] = [
       { productoId: 1, nombreProducto: "Cinturón de cuero trenzado", cantidad: 2, precioUnitario: 15000, subtotal: 30000 },
       { productoId: 4, nombreProducto: "Llavero personalizado", cantidad: 2, precioUnitario: 5000, subtotal: 10000 },
     ],
-    total: 40000,
+    subtotal: 40000,
+    iva: 5200,
+    total: 45200,
     metodoPago: "sinpe",
     referenciaSinpe: "SINPE-20260510-001",
     estado: "completada",
@@ -44,7 +48,9 @@ export const ventas: Venta[] = [
     items: [
       { productoId: 3, nombreProducto: "Bolso de mano artesanal", cantidad: 1, precioUnitario: 45000, subtotal: 45000 },
     ],
-    total: 45000,
+    subtotal: 45000,
+    iva: 5850,
+    total: 50850,
     metodoPago: "efectivo",
     estado: "completada",
     fecha: "2026-05-12T14:00:00Z",
@@ -56,7 +62,9 @@ export const ventas: Venta[] = [
     items: [
       { productoId: 2, nombreProducto: "Billetera de cuero liso", cantidad: 1, precioUnitario: 12000, subtotal: 12000 },
     ],
-    total: 12000,
+    subtotal: 12000,
+    iva: 1560,
+    total: 13560,
     metodoPago: "efectivo",
     estado: "completada",
     fecha: "2026-05-14T09:15:00Z",
@@ -69,7 +77,9 @@ export const ventas: Venta[] = [
       { productoId: 5, nombreProducto: "Rienda para caballo", cantidad: 5, precioUnitario: 28000, subtotal: 140000 },
       { productoId: 8, nombreProducto: "Porta documentos ejecutivo", cantidad: 2, precioUnitario: 22000, subtotal: 44000 },
     ],
-    total: 184000,
+    subtotal: 184000,
+    iva: 23920,
+    total: 207920,
     metodoPago: "credito",
     estado: "completada",
     fecha: "2026-05-15T11:00:00Z",
@@ -81,7 +91,9 @@ export const ventas: Venta[] = [
     items: [
       { productoId: 6, nombreProducto: "Cartera de cuero repujado", cantidad: 1, precioUnitario: 38000, subtotal: 38000 },
     ],
-    total: 38000,
+    subtotal: 38000,
+    iva: 4940,
+    total: 42940,
     metodoPago: "sinpe",
     referenciaSinpe: "SINPE-20260516-002",
     estado: "con_devolucion",
@@ -95,7 +107,9 @@ export const ventas: Venta[] = [
       { productoId: 7, nombreProducto: "Mochila de cuero pequeña", cantidad: 1, precioUnitario: 65000, subtotal: 65000 },
       { productoId: 1, nombreProducto: "Cinturón de cuero trenzado", cantidad: 1, precioUnitario: 15000, subtotal: 15000 },
     ],
-    total: 80000,
+    subtotal: 80000,
+    iva: 10400,
+    total: 90400,
     metodoPago: "efectivo",
     estado: "completada",
     fecha: "2026-06-02T10:00:00Z",
@@ -107,7 +121,9 @@ export const ventas: Venta[] = [
     items: [
       { productoId: 5, nombreProducto: "Rienda para caballo", cantidad: 3, precioUnitario: 28000, subtotal: 84000 },
     ],
-    total: 84000,
+    subtotal: 84000,
+    iva: 10920,
+    total: 94920,
     metodoPago: "credito",
     estado: "completada",
     pedidoOrigenId: 2,
