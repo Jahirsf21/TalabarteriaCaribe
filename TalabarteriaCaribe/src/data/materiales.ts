@@ -1,4 +1,4 @@
-export type UnidadMedida = "metros" | "kilos" | "litros" | "unidades"
+export type UnidadMedida = "metros" | "kilos" | "litros" | "unidades" | "centímetros"
 export type EstadoStock = "normal" | "bajo" | "agotado"
 
 export interface Material {

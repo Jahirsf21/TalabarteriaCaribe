@@ -33,7 +33,7 @@ const navItems = [
   { title: "Pedidos",        url: "/pedidos",         icon: ClipboardList   },
   { title: "Proformas / Cotizaciones", url: "/proformas", icon: FileText    },
   { title: "Productos",      url: "/productos",       icon: Package         },
-  { title: "Materias Primas",url: "/materias-primas", icon: Layers          },
+  { title: "Materias Primas",url: "/materiales",     icon: Layers          },
   { title: "Clientes",       url: "/clientes",        icon: Users           },
   { title: "Proveedores",    url: "/proveedores",     icon: Truck           },
 ]
