@@ -283,11 +283,11 @@ export default function Auditoria() {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead className="min-w-[100px]">Fecha</TableHead>
-                        <TableHead className="min-w-[150px]">Usuario</TableHead>
-                        <TableHead className="min-w-[100px]">Módulo</TableHead>
-                        <TableHead className="min-w-[100px]">Acción</TableHead>
-                        <TableHead className="min-w-[300px]">Descripción</TableHead>
+                        <TableHead className="min-w-25">Fecha</TableHead>
+                        <TableHead className="min-w-37.5">Usuario</TableHead>
+                        <TableHead className="min-w-25">Módulo</TableHead>
+                        <TableHead className="min-w-25">Acción</TableHead>
+                        <TableHead className="min-w-75">Descripción</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -369,13 +369,13 @@ export default function Auditoria() {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead className="min-w-[100px]">Fecha</TableHead>
-                        <TableHead className="min-w-[150px]">Usuario</TableHead>
-                        <TableHead className="min-w-[200px]">Ítem</TableHead>
-                        <TableHead className="min-w-[100px]">Tipo</TableHead>
-                        <TableHead className="min-w-[80px] text-right">Cantidad</TableHead>
-                        <TableHead className="min-w-[80px] text-right">Saldo</TableHead>
-                        <TableHead className="min-w-[300px]">Motivo</TableHead>
+                        <TableHead className="min-w-25">Fecha</TableHead>
+                        <TableHead className="min-w-37.5">Usuario</TableHead>
+                        <TableHead className="min-w-50">Ítem</TableHead>
+                        <TableHead className="min-w-25">Tipo</TableHead>
+                        <TableHead className="min-w-20 text-right">Cantidad</TableHead>
+                        <TableHead className="min-w-20 text-right">Saldo</TableHead>
+                        <TableHead className="min-w-75">Motivo</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
