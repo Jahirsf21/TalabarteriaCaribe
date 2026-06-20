@@ -24,7 +24,7 @@ import { MaterialSelector } from "@/components/entrada-inventario/material-selec
 import { EntradaItemsList } from "@/components/entrada-inventario/entrada-items-list"
 import { EntradaResumen } from "@/components/entrada-inventario/entrada-resumen"
 
-import type { Material } from "@/data/materiales"
+import type { Material, UnidadMedida } from "@/data/materiales"
 import type { Proveedor } from "@/data/proveedores"
 import type { Producto } from "@/data"
 
@@ -45,7 +45,7 @@ export default function EntradaInventario() {
   const [materialSeleccionado, setMaterialSeleccionado] = useState<Material | null>(null)
   const [productoSeleccionado, setProductoSeleccionado] = useState<Producto | null>(null)
   const [nuevoProducto, setNuevoProducto] = useState({ nombre: "", categoria: "", precio: 0 })
-  const [nuevoMaterial, setNuevoMaterial] = useState({ nombre: "", unidad: "" })
+  const [nuevoMaterial, setNuevoMaterial] = useState<{ nombre: string; unidad: UnidadMedida | "" }>({ nombre: "", unidad: "" })
   const [cantidad, setCantidad] = useState(1)
   const [costoUnitario, setCostoUnitario] = useState(0)
   const [fecha, setFecha] = useState(new Date().toISOString().split('T')[0])
