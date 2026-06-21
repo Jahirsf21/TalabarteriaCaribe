@@ -112,30 +112,41 @@ export function ProductoSelector({
                 Seleccionado
               </Badge>
             </div>
-            <div className="flex items-center gap-3">
-              <label className="text-xs font-medium text-muted-foreground whitespace-nowrap">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+              <label className="text-xs font-medium text-muted-foreground">
                 Cantidad:
               </label>
               <div className="flex items-center gap-2 flex-1">
                 <Button
                   variant="outline"
                   size="icon"
-                  className="h-8 w-8"
+                  className="h-9 w-9"
                   onClick={() => onCantidadChange(Math.max(1, cantidad - 1))}
                 >
                   <Minus className="h-3 w-3" />
                 </Button>
                 <Input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
                   min="1"
-                  value={cantidad}
-                  onChange={(e) => onCantidadChange(parseInt(e.target.value) || 1)}
-                  className="text-center"
+                  value={cantidad === 0 ? "" : cantidad}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    if (value === "") {
+                      onCantidadChange(0)
+                    } else {
+                      const num = parseInt(value)
+                      if (!isNaN(num) && num >= 0) {
+                        onCantidadChange(num)
+                      }
+                    }
+                  }}
+                  className="text-center h-9"
                 />
                 <Button
                   variant="outline"
                   size="icon"
-                  className="h-8 w-8"
+                  className="h-9 w-9"
                   onClick={() => onCantidadChange(cantidad + 1)}
                 >
                   <Plus className="h-3 w-3" />
@@ -144,7 +155,7 @@ export function ProductoSelector({
               <Button
                 onClick={onAgregar}
                 disabled={cantidad <= 0}
-                className="shrink-0"
+                className="shrink-0 h-9"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Agregar

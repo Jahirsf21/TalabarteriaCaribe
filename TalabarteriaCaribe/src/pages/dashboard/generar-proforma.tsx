@@ -191,7 +191,7 @@ export default function GenerarProforma() {
             </div>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="grid gap-6 grid-cols-1 lg:grid-cols-3">
             {/* Columna izquierda: Selección */}
             <div className="space-y-6 lg:col-span-2">
               <ClienteSelector

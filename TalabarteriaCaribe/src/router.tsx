@@ -9,8 +9,11 @@ import EntradaInventario from "@/pages/dashboard/entrada-inventario"
 import Productos from "@/pages/productos/productos"
 import Materiales from "@/pages/materiales/materiales"
 import Clientes from "@/pages/clientes/clientes"
+import NuevoCliente from "@/pages/clientes/nuevo-cliente"
 import Proveedores from "@/pages/proveedores/proveedores"
+import NuevoProveedor from "@/pages/proveedores/nuevo-proveedor"
 import Pedidos from "@/pages/pedidos/pedidos"
+import DetallePedido from "@/pages/pedidos/detalle-pedido"
 import Ventas from "@/pages/ventas/ventas"
 import DetalleVenta from "@/pages/ventas/detalle-venta"
 import RegistrarDevolucion from "@/pages/ventas/registrar-devolucion"
@@ -87,6 +90,14 @@ export default function Router() {
           }
         />
         <Route
+          path="/pedidos/:id"
+          element={
+            <RutaProtegida>
+              <DetallePedido />
+            </RutaProtegida>
+          }
+        />
+        <Route
           path="/cotizaciones/generar"
           element={
             <RutaProtegida>
@@ -127,10 +138,26 @@ export default function Router() {
           }
         />
         <Route
+          path="/clientes/nuevo"
+          element={
+            <RutaProtegida>
+              <NuevoCliente />
+            </RutaProtegida>
+          }
+        />
+        <Route
           path="/proveedores"
           element={
             <RutaProtegida>
               <Proveedores />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/proveedores/nuevo"
+          element={
+            <RutaProtegida>
+              <NuevoProveedor />
             </RutaProtegida>
           }
         />

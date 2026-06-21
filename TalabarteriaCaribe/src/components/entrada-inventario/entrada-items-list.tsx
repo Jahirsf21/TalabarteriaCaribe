@@ -113,7 +113,10 @@ export function EntradaItemsList({ itemsEntrada, onActualizarCantidad, onActuali
                           min="0"
                           step="100"
                           value={item.costoUnitario}
-                          onChange={(e) => onActualizarCosto(item.tipo, id!, parseFloat(e.target.value) || 0)}
+                          onChange={(e) => {
+                            const value = e.target.value
+                            onActualizarCosto(item.tipo, id!, value === "" ? 0 : parseFloat(value) || 0)
+                          }}
                           className="w-28 h-7 pl-6 text-sm"
                         />
                       </div>

@@ -176,21 +176,25 @@ export default function Pedidos() {
                 </button>
               )}
             </div>
-            <div className="flex gap-2 min-w-0">
-              <input
-                type="date"
-                value={fechaInicio}
-                onChange={(e) => setFechaInicio(e.target.value)}
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                placeholder="Fecha inicio"
-              />
-              <input
-                type="date"
-                value={fechaFin}
-                onChange={(e) => setFechaFin(e.target.value)}
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                placeholder="Fecha fin"
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 min-w-0">
+              <div className="flex flex-col gap-1">
+                <label className="text-xs text-muted-foreground">Fecha inicio</label>
+                <input
+                  type="date"
+                  value={fechaInicio}
+                  onChange={(e) => setFechaInicio(e.target.value)}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label className="text-xs text-muted-foreground">Fecha fin</label>
+                <input
+                  type="date"
+                  value={fechaFin}
+                  onChange={(e) => setFechaFin(e.target.value)}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                />
+              </div>
             </div>
             <div className="flex gap-2 min-w-0">
               <select
@@ -233,7 +237,7 @@ export default function Pedidos() {
                 </div>
                 <Button
                   onClick={handleAdd}
-                  className="flex items-center gap-2 h-10 md:flex"
+                  className="hidden md:flex items-center gap-2 h-10"
                   style={{ backgroundColor: "#B8895B" }}
                 >
                   <Plus className="h-4 w-4" />
@@ -248,8 +252,9 @@ export default function Pedidos() {
                   {filteredPedidos.map((pedido) => (
                     <div
                       key={pedido.id}
-                      className="rounded-lg border p-4 space-y-3"
+                      className="rounded-lg border p-4 space-y-3 cursor-pointer hover:bg-muted/50"
                       style={{ borderColor: "var(--border)" }}
+                      onClick={() => navigate(`/pedidos/${pedido.id}`)}
                     >
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1 min-w-0">
@@ -291,7 +296,11 @@ export default function Pedidos() {
                     </TableHeader>
                     <TableBody>
                       {filteredPedidos.map((pedido) => (
-                        <TableRow key={pedido.id}>
+                        <TableRow 
+                          key={pedido.id} 
+                          className="cursor-pointer hover:bg-muted/50"
+                          onClick={() => navigate(`/pedidos/${pedido.id}`)}
+                        >
                           <TableCell className="font-medium">#{pedido.id}</TableCell>
                           <TableCell className="text-muted-foreground">{pedido.nombreCliente}</TableCell>
                           <TableCell className="text-sm text-muted-foreground line-clamp-2">

@@ -88,7 +88,10 @@ export function PedidoDetallesForm({
               step="100"
               placeholder="0"
               value={subtotal || ""}
-              onChange={(e) => onSubtotalChange(parseFloat(e.target.value) || 0)}
+              onChange={(e) => {
+                const value = e.target.value
+                onSubtotalChange(value === "" ? 0 : parseFloat(value) || 0)
+              }}
               disabled={disabled}
               className="pl-8"
             />

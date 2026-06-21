@@ -128,11 +128,22 @@ export function ProductoSelector({
                   <Minus className="h-3 w-3" />
                 </Button>
                 <Input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
                   min="1"
                   max={productoSeleccionado.stock}
-                  value={cantidad}
-                  onChange={(e) => setCantidad(parseInt(e.target.value) || 1)}
+                  value={cantidad === 0 ? "" : cantidad}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    if (value === "") {
+                      setCantidad(0)
+                    } else {
+                      const num = parseInt(value)
+                      if (!isNaN(num) && num >= 0) {
+                        setCantidad(num)
+                      }
+                    }
+                  }}
                   className="text-center"
                 />
                 <Button

@@ -139,18 +139,18 @@ export function ClienteSelector({ clienteSeleccionado, onClienteSelect, onClient
         <div className="flex gap-2">
           <Button
             variant={!modoNuevoCliente ? "default" : "outline"}
-            size="sm"
+            size="default"
             onClick={() => setModoNuevoCliente(false)}
-            className="flex-1"
+            className="flex-1 h-10"
           >
             <Search className="h-4 w-4 mr-2" />
             Buscar Cliente
           </Button>
           <Button
             variant={modoNuevoCliente ? "default" : "outline"}
-            size="sm"
+            size="default"
             onClick={() => setModoNuevoCliente(true)}
-            className="flex-1"
+            className="flex-1 h-10"
           >
             <UserPlus className="h-4 w-4 mr-2" />
             Cliente Nuevo
@@ -166,7 +166,7 @@ export function ClienteSelector({ clienteSeleccionado, onClienteSelect, onClient
                 placeholder="Buscar por nombre, cédula o empresa..."
                 value={busqueda}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="pl-9"
+                className="pl-9 h-10"
               />
             </div>
         
@@ -314,7 +314,7 @@ export function ClienteSelector({ clienteSeleccionado, onClienteSelect, onClient
                       variant={nuevoCliente.tipo === "minorista" ? "default" : "outline"}
                       size="sm"
                       onClick={() => setNuevoCliente({ ...nuevoCliente, tipo: "minorista" })}
-                      className="flex-1"
+                      className="flex-1 h-10"
                     >
                       Minorista
                     </Button>
@@ -323,7 +323,7 @@ export function ClienteSelector({ clienteSeleccionado, onClienteSelect, onClient
                       variant={nuevoCliente.tipo === "corporativo" ? "default" : "outline"}
                       size="sm"
                       onClick={() => setNuevoCliente({ ...nuevoCliente, tipo: "corporativo" })}
-                      className="flex-1"
+                      className="flex-1 h-10"
                     >
                       Corporativo
                     </Button>

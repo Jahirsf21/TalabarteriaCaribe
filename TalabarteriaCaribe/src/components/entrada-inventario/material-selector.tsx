@@ -181,7 +181,10 @@ export function MaterialSelector({
                     min="1"
                     step="1"
                     value={cantidad}
-                    onChange={(e) => onCantidadChange(parseInt(e.target.value) || 1)}
+                    onChange={(e) => {
+                      const value = e.target.value
+                      onCantidadChange(value === "" ? 0 : parseInt(value) || 1)
+                    }}
                     className="text-center"
                   />
                   <Button
@@ -208,7 +211,10 @@ export function MaterialSelector({
                     min="0"
                     step="100"
                     value={costoUnitario}
-                    onChange={(e) => onCostoUnitarioChange(parseFloat(e.target.value) || 0)}
+                    onChange={(e) => {
+                      const value = e.target.value
+                      onCostoUnitarioChange(value === "" ? 0 : parseFloat(value) || 0)
+                    }}
                     className="pl-8"
                   />
                 </div>
@@ -368,7 +374,10 @@ export function MaterialSelector({
                   min="0"
                   step="100"
                   value={nuevoProducto.precio || ""}
-                  onChange={(e) => onNuevoProductoChange({ ...nuevoProducto, precio: parseFloat(e.target.value) || 0 })}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    onNuevoProductoChange({ ...nuevoProducto, precio: value === "" ? 0 : parseFloat(value) || 0 })
+                  }}
                   className="pl-8 text-sm"
                 />
               </div>

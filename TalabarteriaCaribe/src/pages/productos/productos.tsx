@@ -183,7 +183,7 @@ export default function Productos() {
                 </div>
                 <Button
                   onClick={handleAdd}
-                  className="flex items-center gap-2 h-10 md:flex"
+                  className="hidden md:flex items-center gap-2 h-10"
                   style={{ backgroundColor: "#B8895B" }}
                 >
                   <Plus className="h-4 w-4" />

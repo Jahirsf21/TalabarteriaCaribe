@@ -91,7 +91,10 @@ export function CotizacionResumen({
               type="number"
               min="1"
               value={validezDias}
-              onChange={(e) => onValidezDiasChange(parseInt(e.target.value) || 15)}
+              onChange={(e) => {
+                const value = e.target.value
+                onValidezDiasChange(value === "" ? 0 : parseInt(value) || 15)
+              }}
               className="text-sm"
             />
             <p className="text-xs text-muted-foreground">

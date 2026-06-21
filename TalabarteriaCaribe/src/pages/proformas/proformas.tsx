@@ -200,21 +200,25 @@ export default function Proformas() {
                 </button>
               )}
             </div>
-            <div className="flex gap-2 min-w-0">
-              <input
-                type="date"
-                value={fechaInicio}
-                onChange={(e) => setFechaInicio(e.target.value)}
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                placeholder="Fecha inicio"
-              />
-              <input
-                type="date"
-                value={fechaFin}
-                onChange={(e) => setFechaFin(e.target.value)}
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                placeholder="Fecha fin"
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 min-w-0">
+              <div className="flex flex-col gap-1">
+                <label className="text-xs text-muted-foreground">Fecha inicio</label>
+                <input
+                  type="date"
+                  value={fechaInicio}
+                  onChange={(e) => setFechaInicio(e.target.value)}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label className="text-xs text-muted-foreground">Fecha fin</label>
+                <input
+                  type="date"
+                  value={fechaFin}
+                  onChange={(e) => setFechaFin(e.target.value)}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                />
+              </div>
             </div>
             <div className="flex gap-2 min-w-0">
               <select
@@ -257,7 +261,7 @@ export default function Proformas() {
                   </div>
                   <Button
                     onClick={() => navigate("/cotizaciones/generar")}
-                    className="flex items-center gap-2  md:flex"
+                    className="hidden md:flex items-center gap-2"
                     style={{ backgroundColor: "#B8895B" }}
                   >
                     <Plus className="h-4 w-4" />
