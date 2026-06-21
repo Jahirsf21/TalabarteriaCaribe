@@ -9,7 +9,7 @@ export interface Cliente {
   correo: string | null
   direccion: string
   empresa?: string
-  ruc?: string
+  cedulaJuridica?: string
   condicionesCredito?: string
   totalComprado: number // colones acumulado
   activo: boolean
@@ -50,7 +50,7 @@ export const clientes: Cliente[] = [
     correo: "jorge@fincaranchosol.cr",
     direccion: "Guácimo, finca Rancho Sol, km 12",
     empresa: "Finca Rancho Sol S.A.",
-    ruc: "3-101-456789",
+    cedulaJuridica: "3-101-456789",
     condicionesCredito: "30 días plazo",
     totalComprado: 385000,
     activo: true,
@@ -77,7 +77,7 @@ export const clientes: Cliente[] = [
     correo: "rnunez@tallerescaribe.com",
     direccion: "Limón, zona franca, bodega 4",
     empresa: "Talleres Caribe Industrial Ltda.",
-    ruc: "3-102-678901",
+    cedulaJuridica: "3-102-678901",
     condicionesCredito: "15 días plazo",
     totalComprado: 560000,
     activo: true,

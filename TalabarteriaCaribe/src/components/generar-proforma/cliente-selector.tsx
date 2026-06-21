@@ -36,7 +36,7 @@ export function ClienteSelector({ clienteSeleccionado, onClienteSelect, onClient
     correo: "",
     direccion: "",
     empresa: "",
-    ruc: "",
+    cedulaJuridica: "",
   })
 
   const clientesFiltrados = clientes.filter((c) => 
@@ -72,7 +72,7 @@ export function ClienteSelector({ clienteSeleccionado, onClienteSelect, onClient
       correo: nuevoCliente.correo || null,
       direccion: nuevoCliente.direccion,
       empresa: nuevoCliente.empresa,
-      ruc: nuevoCliente.ruc,
+      cedulaJuridica: nuevoCliente.cedulaJuridica,
       totalComprado: 0,
       activo: true,
       creadoEn: new Date().toISOString(),
@@ -397,11 +397,11 @@ export function ClienteSelector({ clienteSeleccionado, onClienteSelect, onClient
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label className="text-xs">RUC</Label>
+                      <Label className="text-xs">Cédula Jurídica</Label>
                       <Input
                         placeholder="3-000-000000"
-                        value={nuevoCliente.ruc || ""}
-                        onChange={(e) => setNuevoCliente({ ...nuevoCliente, ruc: e.target.value })}
+                        value={nuevoCliente.cedulaJuridica || ""}
+                        onChange={(e) => setNuevoCliente({ ...nuevoCliente, cedulaJuridica: e.target.value })}
                         className="text-sm"
                       />
                     </div>

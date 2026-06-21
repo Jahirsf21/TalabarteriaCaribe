@@ -7,7 +7,11 @@ import GenerarPedido from "@/pages/dashboard/generar-pedido"
 import GenerarProforma from "@/pages/dashboard/generar-proforma"
 import EntradaInventario from "@/pages/dashboard/entrada-inventario"
 import Productos from "@/pages/productos/productos"
+import NuevoProducto from "@/pages/productos/nuevo-producto"
+import EditarProducto from "@/pages/productos/editar-producto"
 import Materiales from "@/pages/materiales/materiales"
+import NuevoMaterial from "@/pages/materiales/nuevo-material"
+import EditarMaterial from "@/pages/materiales/editar-material"
 import Clientes from "@/pages/clientes/clientes"
 import NuevoCliente from "@/pages/clientes/nuevo-cliente"
 import Proveedores from "@/pages/proveedores/proveedores"
@@ -122,10 +126,42 @@ export default function Router() {
           }
         />
         <Route
+          path="/productos/nuevo"
+          element={
+            <RutaProtegida>
+              <NuevoProducto />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/productos/editar"
+          element={
+            <RutaProtegida>
+              <EditarProducto />
+            </RutaProtegida>
+          }
+        />
+        <Route
           path="/materiales"
           element={
             <RutaProtegida>
               <Materiales />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/materiales/nuevo"
+          element={
+            <RutaProtegida>
+              <NuevoMaterial />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/materiales/editar"
+          element={
+            <RutaProtegida>
+              <EditarMaterial />
             </RutaProtegida>
           }
         />

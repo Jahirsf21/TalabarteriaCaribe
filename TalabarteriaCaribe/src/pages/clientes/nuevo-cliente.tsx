@@ -38,7 +38,7 @@ export default function NuevoCliente() {
     correo: "",
     direccion: "",
     empresa: "",
-    ruc: "",
+    cedulaJuridica: "",
     condicionesCredito: "",
   })
 
@@ -57,8 +57,8 @@ export default function NuevoCliente() {
       return
     }
 
-    if (tipo === "corporativo" && (!formData.empresa || !formData.ruc)) {
-      alert("Para clientes corporativos, empresa y RUC son obligatorios")
+    if (tipo === "corporativo" && (!formData.empresa || !formData.cedulaJuridica)) {
+      alert("Para clientes corporativos, empresa y cédula jurídica son obligatorios")
       return
     }
 
@@ -71,7 +71,7 @@ export default function NuevoCliente() {
       correo: formData.correo || null,
       direccion: formData.direccion,
       empresa: tipo === "corporativo" ? formData.empresa : undefined,
-      ruc: tipo === "corporativo" ? formData.ruc : undefined,
+      cedulaJuridica: tipo === "corporativo" ? formData.cedulaJuridica : undefined,
       condicionesCredito: tipo === "corporativo" ? formData.condicionesCredito : undefined,
       totalComprado: 0,
       activo: true,
@@ -260,11 +260,11 @@ export default function NuevoCliente() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label className="text-xs">RUC *</Label>
+                        <Label className="text-xs">Cédula Jurídica *</Label>
                         <Input
-                          name="ruc"
+                          name="cedulaJuridica"
                           placeholder="3-000-000000"
-                          value={formData.ruc}
+                          value={formData.cedulaJuridica}
                           onChange={handleChange}
                           className="text-sm"
                           required={tipo === "corporativo"}
